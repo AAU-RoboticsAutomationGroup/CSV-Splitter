@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CSV/Excel data splitter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+    <script src="js/plotly-latest.min.js"></script>
+    <script src="js/sb.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container mt-3">
+        <h1>Split time series data loaded from CSV/Excel</h1>
+        <p class="lead">
+            This simple tool helps you split time series data loaded from CSV/Excel into multiple time series data CSV
+            files.
+        </p>
+        <!-- File input field -->
+        <div class="col-md-10" style="float: left">
+            <input type="file" class="custom-file-input" id="fileUpload" name="filename" accept=".csv, .xlsx, .xls">
+            <label class="custom-file-label" for="fileUpload">Choose file</label>
+        </div>
+
+        <!-- Upload button -->
+        <div class="col-md-2" style="float: right">
+            <input type="button" id="upload" class="btn btn-primary" value="Import Data from CSV/Excel file"
+                onclick="Upload()" />
+        </div>
+
+        <div class="col-md-10" id="select_x_y" style="display: none; margin-top: 30px; padding-top: 50px">
+            <!-- Select x-axis value -->
+            <div class="col-sm-1" style="float: left; align-content: center">
+                <p class="font-weight-light">Select X-axis</p>
+            </div>
+            <div class="col-md-4" style="float: left">
+                <select id="x_axis" class="selectpicker" data-live-search="true">
+                </select>
+            </div>
+            <!-- Select y-axis values -->
+            <div class="col-sm-1" style="float: left; align-content: center">
+                <p class="font-weight-light">Select Y-axis</p>
+            </div>
+            <div class="col-md-4" style="float: left">
+                <select id="y_axis" class="selectpicker" multiple data-live-search="true">
+                </select>
+            </div>
+            <!-- Plot chart button -->
+            <div class="col-md-2" style="float: left">
+                <input type="button" id="plot_chart" class="btn btn-info" value="Plot Chart" onclick="draw_image()" />
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3" style="padding-top: 20px">
+    </div>
+
+    <!-- Plot area -->
+    <div class="container mt-3">
+        <div id="plotAreaDiv"></div>
+    </div>
+
+    <!-- Download button -->
+    <div class="container mt-3" style="padding-top: 20px">
+        <button id="downloadCSV" style="display: none" type="submit" class="btn btn-primary" data-toggle="tooltip"
+            data-placement="top" title="Download current plot to CSV file" onclick="download_csv()">Download
+            Data</button>
+    </div>
+
+    <!-- <div class="container mt-3">
+        <table id="myTable" hidden="hidden"></table>
+    </div> -->
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+</body>
+
+</html>
