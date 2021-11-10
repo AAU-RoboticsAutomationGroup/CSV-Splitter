@@ -7,4 +7,6 @@ Small web/javescript-based application to split time series data in CSV-files e.
 
 ![](docs/3.png)
 
-
+## Authors
+* Chen Li
+* Simon Bøgh
