@@ -74,6 +74,21 @@
     </div>
 
     <!-- Download button -->
+    <div class="container mt-3" style="padding-top: 20px; display: none" id="download-controls">
+        <div>
+            <label for="filename-input">Filename:</label>
+            <input type="text" id="filename-input" name="filename" value="filename">
+        </div>
+        <div>
+            <label for="prefix-input">Filename prefix:</label>
+            <input type="text" id="prefix-input" name="prefix" value="prefix">
+        </div>
+        <div>
+            <label for="class-input">Class/label:</label>
+            <input type="text" id="class-input" name="class" value="class1">
+        </div>
+    </div>
+
     <div class="container mt-3" style="padding-top: 20px">
         <button id="downloadCSV" style="display: none" type="submit" class="btn btn-primary" data-toggle="tooltip"
             data-placement="top" title="Download current plot to CSV file" onclick="download_csv()">Download

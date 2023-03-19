@@ -101,9 +101,19 @@ function download_csv() {
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';
-    hiddenElement.download = 'data_output.csv';
+
+    // Get the values from the input fields
+    var filename = document.getElementById("filename-input").value;
+    var prefix = document.getElementById("prefix-input").value;
+    var selectedClass = document.getElementById("class-input").value;
+
+    // Generate the output filename using the provided values
+    var outputFilename = prefix + '_' + filename + '_' + selectedClass + '.csv';
+
+    hiddenElement.download = outputFilename;
     hiddenElement.click();
 }
+
 
 // Draw plot
 function draw_image() {
@@ -154,6 +164,7 @@ function draw_image() {
     graphDiv.on('plotly_relayout',
         function (eventdata) {
             document.getElementById("downloadCSV").style.display = "block"
+            document.getElementById("download-controls").style.display = "block"
             write_to_file = [];
             if (typeof eventdata['xaxis.range[0]'] !== 'undefined') {
                 for (var i = 0; i < myArray_X.length; i++) {
